@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mental Health Screeners</title>
+<style>
+    body { margin:0; font-family: 'Segoe UI', Arial, sans-serif; background: #f8fafc; }
+    .container { display: flex; height: 100vh; }
+    .sidebar {
+        width: 260px; background: #fff; display: flex; flex-direction: column;
+        padding: 24px 0 0 0; border-right: 1px solid #e0e0e0;
+    }
+    .logo { font-size: 1.3em; padding: 0 24px 32px 24px; font-weight: bold; color: #15803d; }
+    nav ul { list-style: none; padding: 0 24px; }
+    nav li { padding: 14px 12px; cursor: pointer; border-radius: 8px; margin-bottom: 6px }
+    nav li.active { background: #ecfdf5; color: #16a34a; font-weight: 500; }
+    .crisis-support {
+        margin: 44px 24px 0px 24px; background: #fef2f2; color: #dc2626;
+        padding: 12px; border-radius: 10px; font-size: .97em;
+    }
+    .profile { margin: auto 0 12px 24px; padding: 10px 0; display: flex; flex-direction: column; }
+    .main-content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f8fafc; }
+    .cards-row { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+    .assessment-card {
+        background: #fff; border-radius: 16px; box-shadow: 0 3px 14px rgba(58,90,180,0.10);
+        padding: 36px 28px; width: 280px; text-align: center;
+    }
+    .assessment-card h1 { font-size: 1.2em; margin-bottom: 6px; font-weight: 700; }
+    .assessment-card .desc { color: #64748b; font-size: 0.95em; margin-bottom: 18px; margin-top: 4px; }
+    .btn {
+        background: #2563eb; color: #fff; border: none; border-radius: 7px;
+        padding: 9px 20px; cursor: pointer; font-size: 0.95em; font-weight: 500;
+        text-decoration: none; display: inline-block;
+    }
+    .btn:disabled { background: #dbeafe; color: #64748b; cursor: not-allowed; }
+    .question-card { max-width: 450px; width: 98%; background:#fff; border-radius:16px;
+        box-shadow: 0 3px 14px rgba(58,90,180,0.10); padding: 46px 38px 38px; margin:auto; }
+    .question-card h1 { font-size: 1.5em; margin-bottom: 4px; font-weight: 700; }
+    .question-card .desc { color:#64748b; font-size:1.02em; margin-bottom:20px; margin-top:2px; }
+    .question-card .question-num { color:#6366f1; font-size:1.08em; font-weight:500; margin-bottom:16px; }
+    .question-card .question-text { font-size:1.12em; font-weight:500; margin-bottom:18px; }
+    .choices { display:flex; flex-direction:column; gap:13px; margin-bottom:18px; }
+    .choice-label {
+        background:#f8fafc; border-radius:8px; padding:14px 18px; border:1px solid #e2e8f0;
+        display:flex; align-items:center; font-size:1em; cursor:pointer; transition: box-shadow 0.11s;
+    }
+    .choice-label:hover, .choice-label input:checked + span {
+        box-shadow:0 1px 6px rgba(100,100,200,0.09); border-color:#2563eb;
+    }
+    .choices input[type="radio"] { margin-right:12px; accent-color:#2563eb; }
+    .action-row { text-align:right; }
+    .score-result { color:#16a34a; font-weight:bold; font-size:1.35em; margin:16px 0 8px 0; }
+    .result-message { color:#334155; font-size:1.07em; margin-bottom:12px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <aside class="sidebar">
+        <div class="logo">MindCare<br><span style="font-size:0.93em;color:#525252;">Mental Wellness Hub</span></div>
+        <nav>
+            <ul>
+                <li>Wellness Dashboard</li>
+                <li>AI Chat Support</li>
+                <li>Book Appointment</li>
+                <li>Resource Library</li>
+                <li>Peer Support</li>
+                <li class="active">Self Assessment</li>
+            </ul>
+        </nav>
+        <div class="crisis-support">
+            <strong>Crisis Support</strong><br>
+            Emergency: 112<br>
+            Helpline: 1800-111-222
+        </div>
+        <div class="profile">
+            <span>Manchala Anvitha</span>
+            <small>Safe space for growth</small>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div id="dashboard" class="cards-row">
+            <div class="assessment-card">
+                <h1>Depression Screener (PHQ-9)</h1>
+                <div class="desc">9 questions, takes about 5 minutes.</div>
+                <button class="btn" onclick="startAssessment('phq')">Start Assessment</button>
+            </div>
+            <div class="assessment-card">
+                <h1>Anxiety Screener (GAD-7)</h1>
+                <div class="desc">7 questions, takes about 5 minutes.</div>
+                <button class="btn" onclick="startAssessment('gad')">Start Assessment</button>
+            </div>
+        </div>
+        <div id="assessmentCard" style="display:none;" class="question-card"></div>
+    </main>
+</div>
+<script>
+const phqQuestions = [
+    "Little interest or pleasure in doing things",
+    "Feeling down, depressed, or hopeless",
+    "Trouble falling or staying asleep, or sleeping too much",
+    "Feeling tired or having little energy",
+    "Poor appetite or overeating",
+    "Feeling bad about yourself – or that you are a failure or have let yourself or your family down",
+    "Trouble concentrating on things, such as reading the newspaper or watching television",
+    "Moving or speaking so slowly that other people could have noticed? Or the opposite – being so fidgety or restless that you have been moving around a lot more than usual",
+    "Thoughts that you would be better off dead, or thoughts of hurting yourself in some way"
+];
+
+const gadQuestions = [
+    "Feeling nervous, anxious, or on edge",
+    "Not being able to stop or control worrying",
+    "Worrying too much about different things",
+    "Trouble relaxing",
+    "Being so restless that it is hard to sit still",
+    "Becoming easily annoyed or irritable",
+    "Feeling afraid, as if something awful might happen"
+];
+
+const choices = [
+    { text: "Not at all", value: 0 },
+    { text: "Several days", value: 1 },
+    { text: "More than half the days", value: 2 },
+    { text: "Nearly every day", value: 3 }
+];
+
+let currentQ = 0;
+let answers = [];
+let currentType = "phq";
+
+function startAssessment(type) {
+    currentType = type;
+    currentQ = 0;
+    answers = [];
+    document.getElementById('dashboard').style.display="none";
+    document.getElementById('assessmentCard').style.display="block";
+    renderAssessment();
+}
+
+function renderAssessment() {
+    const card = document.getElementById('assessmentCard');
+    const qList = currentType === "phq" ? phqQuestions : gadQuestions;
+
+    if (currentQ < qList.length) {
+        card.innerHTML = `
+            <h1>${currentType === "phq" ? "Depression Screener (PHQ-9)" : "Anxiety Screener (GAD-7)"}</h1>
+            <div class="desc">Over the last 2 weeks, how often have you been bothered by the following problem?</div>
+            <div class="question-num">Question ${currentQ + 1} of ${qList.length}</div>
+            <div class="question-text">${qList[currentQ]}</div>
+            <form id="choiceForm">
+                <div class="choices">
+                    ${choices.map((c,i) => `
+                        <label class="choice-label">
+                            <input type="radio" name="answer" value="${c.value}" ${i === 0 ? 'checked' : ''}/>
+                            <span>${c.text}</span>
+                        </label>
+                    `).join('')}
+                </div>
+                <div class="action-row">
+                    <button type="submit" class="btn">Next</button>
+                </div>
+            </form>
+        `;
+        document.getElementById("choiceForm").onsubmit = function(e){
+            e.preventDefault();
+            const v = document.querySelector('input[name="answer"]:checked').value;
+            answers.push(Number(v));
+            currentQ++;
+            renderAssessment();
+        };
+    } else {
+        let total = answers.reduce((a,b)=>a+b,0);
+        let message;
+        if (currentType === "phq") {
+            if (total < 5) message = "Minimal depression";
+            else if (total < 10) message = "Mild depression";
+            else if (total < 15) message = "Moderate depression";
+            else if (total < 20) message = "Moderately severe depression";
+            else message = "Severe depression";
+        } else {
+            if (total < 5) message = "Minimal anxiety";
+            else if (total < 10) message = "Mild anxiety";
+            else if (total < 15) message = "Moderate anxiety";
+            else message = "Severe anxiety";
+        }
+
+        card.innerHTML = `
+            <div style="text-align:center; padding:30px;">
+                <div style="font-size:3em; color:#16a34a;">✔</div>
+                <h1>Assessment Complete</h1>
+                <p>Your score is <span style="color:#2563eb; font-weight:bold;">${total}</span></p>
+                <div class="score-result">${message}</div>
+                <p style="color:#475569; font-size:0.95em; margin-bottom:20px;">
+                    ${message.includes("anxiety") ? "Talking to our AI assistant or a counsellor could provide you with useful strategies." 
+                    : "Consider exploring support resources or booking a session with a counsellor."}
+                </p>
+                
+                <h3 style="margin:20px 0 14px; font-size:1.05em;">Recommended Next Steps:</h3>
+                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:20px;">
+                    <a href="resource.html" class="btn">Resources</a>
+                    <a href="chatbot.html" class="btn">AI Chat</a>
+                    <a href="booking.html" class="btn">Book Session</a>
+                </div>
+
+                <button class="btn" style="background:#64748b;" onclick="goBack()">Take Another Assessment</button>
+            </div>
+        `;
+    }
+}
+
+function goBack() {
+    document.getElementById('assessmentCard').style.display="none";
+    document.getElementById('dashboard').style.display="flex";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recent Appointments</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      margin: 0;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #15803d;
+      margin-bottom: 20px;
+    }
+    .appointments {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    th {
+      background-color: #15803d;
+      color: white;
+      font-weight: 600;
+    }
+    .status {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.9em;
+      text-transform: capitalize;
+    }
+    .pending { background: #facc15; color: #78350f; }
+    .confirmed { background: #22c55e; color: white; }
+    .completed { background: #3b82f6; color: white; }
+    .cancelled { background: #ef4444; color: white; }
+  </style>
+</head>
+<body>
+  <h2>Recent Appointments</h2>
+  <div class="appointments">
+    <table>
+      <thead>
+        <tr>
+          <th>Patient</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ravi Kumar</td>
+          <td>2025-09-25</td>
+          <td>10:30 AM</td>
+          <td><span class="status pending">Pending</span></td>
+        </tr>
+        <tr>
+          <td>Anjali Sharma</td>
+          <td>2025-09-25</td>
+          <td>12:00 PM</td>
+          <td><span class="status confirmed">Confirmed</span></td>
+        </tr>
+        <tr>
+          <td>Rahul Verma</td>
+          <td>2025-09-26</td>
+          <td>02:15 PM</td>
+          <td><span class="status completed">Completed</span></td>
+        </tr>
+        <tr>
+          <td>Sneha Reddy</td>
+          <td>2025-09-26</td>
+          <td>04:00 PM</td>
+          <td><span class="status cancelled">Cancelled</span></td>
+        </tr>
+        <tr>
+          <td>Priya Singh</td>
+          <td>2025-09-27</td>
+          <td>11:00 AM</td>
+          <td><span class="status pending">Pending</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

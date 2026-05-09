@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resource Library - MindCare</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8fafc;
+      color: #333;
+    }
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 250px;
+      background: #fff;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+      padding: 20px;
+    }
+    .sidebar h2 {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    .sidebar h2 span {
+      margin-left: 10px;
+      font-weight: 600;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      margin: 15px 0;
+      font-size: 15px;
+    }
+    .sidebar ul li a {
+      text-decoration: none;
+      color: #333;
+      padding: 8px 12px;
+      display: block;
+      border-radius: 8px;
+    }
+    .sidebar ul li a:hover,
+    .sidebar ul li a.active {
+      background: #e6f0ff;
+      color: #0077ff;
+    }
+    .crisis-box {
+      margin-top: 30px;
+      padding: 15px;
+      background: #fff4f4;
+      border-left: 4px solid #ff4b4b;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .user {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #666;
+    }
+    /* Main content */
+    .main {
+      margin-left: 260px;
+      padding: 20px;
+    }
+    .header h1 {
+      font-size: 24px;
+    }
+    .filters {
+      display: flex;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .filters input, .filters select {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      flex: 1;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+    .tag {
+      display: inline-block;
+      background: #eef4ff;
+      color: #0077ff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+    audio {
+      width: 100%;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>💙 <span>MindCare</span></h2>
+    <ul>
+      <li><a href="#">Wellness Dashboard</a></li>
+      <li><a href="#">AI Chat Support</a></li>
+      <li><a href="#">Book Appointment</a></li>
+      <li><a href="#" class="active">Resource Library</a></li>
+      <li><a href="#">Peer Support</a></li>
+      <li><a href="#">Self Assessment</a></li>
+    </ul>
+    <div class="crisis-box">
+      <b>❤ Crisis Support</b><br>
+      Emergency: <b>112</b><br>
+      Helpline: <b>1800-111-222</b>
+    </div>
+    <div class="user">
+      Dhivyapatel Kashetty<br>
+      <i>Safe space for growth</i>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="header">
+      <h1>Resource Library</h1>
+      <p>Explore curated content to support your mental wellness journey.</p>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <input type="text" id="search" placeholder="🔍 Search resources...">
+      <select id="category">
+        <option>All Categories</option>
+        <option>Anxiety</option>
+        <option>Stress Management</option>
+        <option>Sleep</option>
+      </select>
+      <select id="type">
+        <option>All Types</option>
+        <option>Guide</option>
+        <option>Exercise</option>
+        <option>Audio</option>
+      </select>
+    </div>
+
+    <!-- Resources Grid -->
+    <div class="grid" id="resourceGrid">
+      <!-- Anxiety -->
+      <div class="card" data-category="Anxiety" data-type="Guide">
+        <div class="tag">Anxiety</div>
+        <h3>Understanding Anxiety</h3>
+        <p>Learn about symptoms, triggers, and coping techniques for anxiety.</p>
+      </div>
+      <div class="card" data-category="Anxiety" data-type="Exercise">
+        <div class="tag">Anxiety</div>
+        <h3>Grounding Exercise (5-4-3-2-1)</h3>
+        <p>Identify 5 things you see, 4 you feel, 3 you hear, 2 you smell, 1 you taste.</p>
+      </div>
+      <div class="card" data-category="Anxiety" data-type="Audio">
+        <div class="tag">Anxiety</div>
+        <h3>Relaxing Music for Anxiety Relief</h3>
+        <audio controls>
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+      <div class="card" data-category="Anxiety" data-type="Guide">
+        <div class="tag">Anxiety</div>
+        <h3>Managing Social Anxiety</h3>
+        <p>Tips for building confidence and handling social interactions calmly.</p>
+      </div>
+
+      <!-- Stress -->
+      <div class="card" data-category="Stress Management" data-type="Guide">
+        <div class="tag">Stress Management</div>
+        <h3>10 Ways to Reduce Stress</h3>
+        <p>Daily strategies to reduce mental and physical stress.</p>
+      </div>
+      <div class="card" data-category="Stress Management" data-type="Exercise">
+        <div class="tag">Stress Management</div>
+        <h3>Progressive Muscle Relaxation</h3>
+        <p>Tense and relax each muscle group slowly to calm your body.</p>
+      </div>
+      <div class="card" data-category="Stress Management" data-type="Audio">
+        <div class="tag">Stress Management</div>
+        <h3>Nature Sounds</h3>
+        <audio controls>
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+      <div class="card" data-category="Stress Management" data-type="Guide">
+        <div class="tag">Stress Management</div>
+        <h3>Mindfulness for Stress</h3>
+        <p>Learn how mindfulness reduces stress and improves focus.</p>
+      </div>
+
+      <!-- Sleep -->
+      <div class="card" data-category="Sleep" data-type="Guide">
+        <div class="tag">Sleep</div>
+        <h3>Sleep Hygiene Tips</h3>
+        <p>Establish routines like limiting screen time and caffeine before bed.</p>
+      </div>
+      <div class="card" data-category="Sleep" data-type="Exercise">
+        <div class="tag">Sleep</div>
+        <h3>Body Scan Meditation</h3>
+        <p>Lie down, close eyes, and scan your body for relaxation before sleep.</p>
+      </div>
+      <div class="card" data-category="Sleep" data-type="Audio">
+        <div class="tag">Sleep</div>
+        <h3>Calm Sleep Music</h3>
+        <audio controls>
+          <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+      <div class="card" data-category="Sleep" data-type="Guide">
+        <div class="tag">Sleep</div>
+        <h3>Evening Routine Guide</h3>
+        <p>Wind down with light stretching and reading instead of screens.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById("search");
+    const categorySelect = document.getElementById("category");
+    const typeSelect = document.getElementById("type");
+    const cards = document.querySelectorAll(".card");
+
+    function filterResources() {
+      const search = searchInput.value.toLowerCase();
+      const category = categorySelect.value;
+      const type = typeSelect.value;
+
+      cards.forEach(card => {
+        const matchesSearch = card.innerText.toLowerCase().includes(search);
+        const matchesCategory = category === "All Categories" || card.dataset.category === category;
+        const matchesType = type === "All Types" || card.dataset.type === type;
+
+        card.style.display = (matchesSearch && matchesCategory && matchesType) ? "block" : "none";
+      });
+    }
+
+    searchInput.addEventListener("input", filterResources);
+    categorySelect.addEventListener("change", filterResources);
+    typeSelect.addEventListener("change", filterResources);
+  </script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book a Confidential Session</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      display: flex;
+      margin: 40px;
+      gap: 20px;
+    }
+
+    /* Main content card */
+    .container {
+      width: 600px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      color: #2c3e50;
+      font-size: 22px;
+    }
+
+    p.subtitle {
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    select, input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccd1d9;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .time-slots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .time-btn {
+      padding: 10px;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      background: #f0f0f0;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+    }
+    .time-btn:hover {
+      background: #e2e6ea;
+    }
+    .time-btn.active {
+      background: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #007bff;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+
+    .success {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .success h2 {
+      color: #28a745;
+      font-size: 22px;
+    }
+
+    .success p {
+      font-size: 15px;
+      color: #555;
+    }
+
+    .details {
+      margin-top: 20px;
+      font-size: 15px;
+      color: #333;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .privacy-box {
+      background: #e9f4ff;
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #2c3e50;
+    }
+
+    .privacy-box h3 {
+      margin-top: 0;
+      color: #007bff;
+      font-size: 16px;
+    }
+
+    .expect-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      font-size: 14px;
+    }
+
+    .expect-box h3 {
+      margin-top: 0;
+      font-size: 16px;
+      color: #2c3e50;
+    }
+
+    .expect-box ul {
+      margin: 10px 0 0 20px;
+      padding: 0;
+      color: #555;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <!-- MAIN CONTENT -->
+  <div class="container" id="step1">
+    <h2>Book a Confidential Session</h2>
+    <p class="subtitle">Take a brave step towards your mental well-being. We’re here to help.</p>
+
+    <h2>1. Tell Us About Your Needs</h2>
+
+    <label>Type of Support</label>
+    <select id="supportType">
+      <option value="">Select</option>
+      <option value="Helpline">On-campus councellor</option>
+      <option value="Therapy">Therapy Session</option>
+    </select>
+
+    <label>Primary Concern</label>
+    <select id="concern">
+      <option value="">Select</option>
+      <option value="Anxiety">Anxiety</option>
+      <option value="Depression">Depression</option>
+      <option value="Stress">Stress</option>
+    </select>
+
+    <label>Urgency Level</label>
+    <select id="urgency">
+      <option value="">Select</option>
+      <option value="Low">Low - Can wait</option>
+      <option value="Medium">Medium - Need soon</option>
+      <option value="High">High - Need urgent support</option>
+    </select>
+
+    <button class="btn" onclick="goToStep(2)">Next: Select Time</button>
+  </div>
+
+  <div class="container" id="step2" style="display:none;">
+    <h2>Book a Confidential Session</h2>
+    <p class="subtitle">Take a brave step towards your mental well-being. We’re here to help.</p>
+
+    <h2>2. Schedule Your Session</h2>
+
+    <label>Select a Date</label>
+    <input type="date" id="date">
+
+    <label>Available Time Slots</label>
+    <div class="time-slots" id="timeSlots">
+      <button class="time-btn" onclick="selectTime(this)">09:00 AM</button>
+      <button class="time-btn" onclick="selectTime(this)">10:00 AM</button>
+      <button class="time-btn" onclick="selectTime(this)">11:00 AM</button>
+      <button class="time-btn" onclick="selectTime(this)">12:00 PM</button>
+      <button class="time-btn" onclick="selectTime(this)">01:00 PM</button>
+      <button class="time-btn" onclick="selectTime(this)">02:00 PM</button>
+      <button class="time-btn" onclick="selectTime(this)">03:00 PM</button>
+      <button class="time-btn" onclick="selectTime(this)">04:00 PM</button>
+    </div>
+
+    <label>Additional Notes (Optional)</label>
+    <textarea id="notes" rows="3" placeholder="Anything you'd like to share beforehand?"></textarea><br>
+
+    <label class="checkbox-label">
+      <input type="checkbox" id="anonymous"> Book Anonymously
+    </label>
+
+    <button class="btn" onclick="confirmBooking()">Confirm Appointment</button>
+  </div>
+
+  <div class="container" id="step3" style="display:none;">
+    <h2>Book a Confidential Session</h2>
+    <div class="success">
+      <h2>✔ Appointment Booked Successfully!</h2>
+      <p>Your request has been received. You will get a confirmation email shortly.</p><br>
+      <div class="details" id="bookingDetails"></div><br>
+      <button class="btn" onclick="goToStep(1)">Book Another Appointment</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="privacy-box">
+      <h3>Your Privacy is Assured</h3>
+      <p>All sessions are 100% confidential. Your information is protected and will not be shared without your consent.</p>
+    </div>
+    <div class="expect-box">
+      <h3>What to Expect</h3>
+      <ul>
+        <li>A safe, non-judgmental space to talk.</li>
+        <li>Sessions are typically 45-50 minutes long.</li>
+        <li>You’ll receive an email with details once confirmed.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  let selectedTime = "";
+  let selectedDate = "";
+
+  function goToStep(step) {
+    document.getElementById("step1").style.display = step === 1 ? "block" : "none";
+    document.getElementById("step2").style.display = step === 2 ? "block" : "none";
+    document.getElementById("step3").style.display = step === 3 ? "block" : "none";
+  }
+
+  function selectTime(btn) {
+    const buttons = document.querySelectorAll(".time-btn");
+    buttons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    selectedTime = btn.textContent;
+  }
+
+  function confirmBooking() {
+    selectedDate = document.getElementById("date").value;
+    if (!selectedDate || !selectedTime) {
+      alert("Please select a date and time slot before confirming.");
+      return;
+    }
+
+    goToStep(3);
+
+    const bookingDetails = document.getElementById("bookingDetails");
+    bookingDetails.innerHTML = `
+      <p><strong>Date:</strong> ${selectedDate}</p>
+      <p><strong>Time:</strong> ${selectedTime}</p>
+      <p><strong>Anonymous:</strong> ${document.getElementById("anonymous").checked ? "Yes" : "No"}</p>
+    `;
+  }
+</script>
+
+</body>
+</html>
